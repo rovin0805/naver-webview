@@ -26,6 +26,7 @@ export default function TabNavigation() {
         },
         tabBarActiveTintColor: '#fff',
         tabBarInactiveTintColor: '#fff',
+        headerShown: false,
       }}>
       <Tab.Screen
         name={ROUTES_NAME.HOME}
