@@ -8,7 +8,7 @@ const MAIN_URL = 'https://m.naver.com';
 
 const HomeScreen = ({navigation}: NativeStackScreenPropsType) => {
   return (
-    <SafeAreaWrapper>
+    <SafeAreaWrapper edges={['top']}>
       <WebView
         source={{uri: MAIN_URL}}
         showsVerticalScrollIndicator={false}

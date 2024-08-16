@@ -1,10 +1,11 @@
 import React, {PropsWithChildren} from 'react';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {Edges, SafeAreaView} from 'react-native-safe-area-context';
 
-const SafeAreaWrapper = ({children}: PropsWithChildren) => (
-  <SafeAreaView
-    edges={['top', 'bottom']}
-    style={{flexGrow: 1, backgroundColor: 'black'}}>
+const SafeAreaWrapper = ({
+  children,
+  edges = ['top', 'bottom'],
+}: PropsWithChildren<{edges?: Edges}>) => (
+  <SafeAreaView edges={edges} style={{flexGrow: 1, backgroundColor: 'black'}}>
     {children}
   </SafeAreaView>
 );
