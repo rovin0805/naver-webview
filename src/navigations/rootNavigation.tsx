@@ -15,7 +15,11 @@ const RootNavigation = () => {
         component={TabNavigation}
         options={{headerShown: false}}
       />
-      <Stack.Screen name={ROUTES_NAME.BROWSER} component={Browser} />
+      <Stack.Screen
+        name={ROUTES_NAME.BROWSER}
+        component={Browser}
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 };

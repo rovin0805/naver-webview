@@ -1,14 +1,14 @@
 import React from 'react';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import WebView from 'react-native-webview';
 import {NativeStackScreenPropsType} from '@/navigations/types';
 import {ROUTES_NAME} from '@/navigations/routes';
+import SafeAreaWrapper from '@/shared/components/SafeAreaWrapper';
 
 const MAIN_URL = 'https://m.naver.com';
 
 const HomeScreen = ({navigation}: NativeStackScreenPropsType) => {
   return (
-    <SafeAreaView edges={['top']} style={{flexGrow: 1}}>
+    <SafeAreaWrapper>
       <WebView
         source={{uri: MAIN_URL}}
         showsVerticalScrollIndicator={false}
@@ -29,7 +29,7 @@ const HomeScreen = ({navigation}: NativeStackScreenPropsType) => {
           return true;
         }}
       />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 };
 
