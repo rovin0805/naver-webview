@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {Share, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import WebView from 'react-native-webview';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -8,9 +8,10 @@ interface NavProps {
   webViewRef: React.RefObject<WebView>;
   canGoBack: boolean;
   canGoForward: boolean;
+  currentUrl: string;
 }
 
-const Nav = ({webViewRef, canGoBack, canGoForward}: NavProps) => {
+const Nav = ({webViewRef, canGoBack, canGoForward, currentUrl}: NavProps) => {
   const navigation = useNavigation();
 
   return (
@@ -68,6 +69,14 @@ const Nav = ({webViewRef, canGoBack, canGoForward}: NavProps) => {
           webViewRef.current?.reload();
         }}>
         <MaterialCommunityIcons name="refresh" color={'white'} size={24} />
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => {
+          Share.share({message: currentUrl});
+        }}>
+        <MaterialCommunityIcons name="share" color={'white'} size={24} />
       </TouchableOpacity>
     </View>
   );

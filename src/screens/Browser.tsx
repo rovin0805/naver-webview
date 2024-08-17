@@ -50,6 +50,7 @@ const BrowserScreen = ({route}: Props) => {
         webViewRef={webViewRef}
         canGoBack={canGoBack}
         canGoForward={canGoForward}
+        currentUrl={currentUrl}
       />
     </SafeAreaWrapper>
   );
