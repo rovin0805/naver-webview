@@ -3,4 +3,5 @@ export const ROUTES_NAME = {
   HOME: 'Home',
   SHOPPING: 'Shopping',
   BROWSER: 'Browser',
+  LOGIN: 'Login',
 } as const;
