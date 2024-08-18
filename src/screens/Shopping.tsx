@@ -1,23 +1,25 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useContext, useRef, useState} from 'react';
 import {RefreshControl, ScrollView} from 'react-native';
 import WebView from 'react-native-webview';
 import SafeAreaWrapper from '@/shared/components/SafeAreaWrapper';
 import {ROUTES_NAME} from '@/navigations/routes';
 import {NativeStackScreenPropsType} from '../navigations/types';
+import {WebViewContext} from '@/shared/context/webview';
 
 const SHOPPING_URL = 'https://shopping.naver.com/home';
 
 const ShoppingScreen = ({navigation}: NativeStackScreenPropsType) => {
-  const webviewRef = useRef<WebView>(null);
+  const webViewRef = useRef<WebView | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+  const context = useContext(WebViewContext);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
-    webviewRef.current?.reload();
+    webViewRef.current?.reload();
   }, []);
 
   return (
-    <SafeAreaWrapper edges={['top']}>
+    <SafeAreaWrapper edges={[]}>
       <ScrollView
         contentContainerStyle={{flex: 1}}
         refreshControl={
@@ -28,7 +30,12 @@ const ShoppingScreen = ({navigation}: NativeStackScreenPropsType) => {
           />
         }>
         <WebView
-          ref={webviewRef}
+          ref={ref => {
+            webViewRef.current = ref;
+            if (ref) {
+              context?.addWebView(ref);
+            }
+          }}
           source={{uri: SHOPPING_URL}}
           showsVerticalScrollIndicator={false}
           showsHorizontalScrollIndicator={false}
