@@ -11,6 +11,18 @@ import {WebViewContext} from '@/shared/context/webview';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Browser'>;
 
+const DISABLE_PINCH_ZOOM_AND_TEXT_LONG_PRESS = `
+  (function() {
+    var metaTag = document.createElement('meta');
+    metaTag.name = 'viewport';
+    metaTag.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+    document.getElementsByTagName('head')[0].appendChild(metaTag);
+
+    document.body.style['user-select'] = 'none';
+    document.body.style['-webkit-user-select'] = 'none';
+  })();
+`;
+
 const BrowserScreen = ({route}: Props) => {
   const uri = route.params.url;
   const [currentUrl, setCurrentUrl] = useState(uri);
@@ -53,6 +65,9 @@ const BrowserScreen = ({route}: Props) => {
         onLoadEnd={() => {
           animatedProgress.setValue(0);
         }}
+        injectedJavaScript={DISABLE_PINCH_ZOOM_AND_TEXT_LONG_PRESS}
+        onMessage={event => {}}
+        allowsLinkPreview={false}
       />
       <Nav
         webViewRef={webViewRef}
